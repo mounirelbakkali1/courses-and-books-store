@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="booksJson"></div>
+</body>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+  $(document).ready(function(){
+    $.getJSON("http://localhost:8088/books", function(result){
+      $.each(result, function(key,value) {
+        $("#booksJson").append(value.id+" "+value.name+" ");
+      });
+    });
+  });
+</script>
+</html>

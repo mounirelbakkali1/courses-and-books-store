@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $("button").click(function() {
+      var productmodel = {
+        id : "3",
+        name : "Ginger"
+      };
+      var requestJSON = JSON.stringify(productmodel);
+      $.ajax({
+        type : "POST",
+        url : "http://localhost:8088/books",
+        headers : {
+          "Content-Type" : "application/json"
+        },
+        data : requestJSON,
+        success : function(data) {
+          alert(data);
+        },
+        error : function(data) {
+        }
+      });
+    });
+  });
+</script>
+</html>
