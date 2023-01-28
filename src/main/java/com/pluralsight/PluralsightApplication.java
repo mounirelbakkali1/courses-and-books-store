@@ -122,6 +122,8 @@ public class PluralsightApplication {
             courseService.persist(course);
             courseService.findAllCourses().stream()
                     .forEach(System.out::println);
+
+
         };
     }
 

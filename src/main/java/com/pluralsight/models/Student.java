@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ public class Student extends User{
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToMany(cascade = {PERSIST,MERGE})
+    @ManyToMany(cascade = {PERSIST,MERGE},fetch = FetchType.LAZY)
             @JoinTable(
                     name = "student_course",
                     joinColumns = @JoinColumn(name = "student_id"),
@@ -32,7 +34,7 @@ public class Student extends User{
             )
     private List<Course> ListOfCoursesEnrolledIn =new ArrayList<Course>();
 
-    @OneToMany(cascade = ALL,mappedBy = "studentPreference")
+    @OneToMany(cascade = ALL,mappedBy = "studentPreference",fetch = FetchType.LAZY)
     private List<Tages> preferenceTopics=new ArrayList<>();
 
 
