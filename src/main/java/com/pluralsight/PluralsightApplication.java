@@ -13,6 +13,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import static java.time.temporal.ChronoUnit.HOURS;
 
@@ -39,7 +43,23 @@ public class PluralsightApplication {
 
             Book book = new Book();
             book.setIsbn("E-8989");
+
+
+            Author author = new Author();
+            author.setFullname("Alex feiro");
+            author.setBio("american author");
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.DATE,05);
+            calendar.set(Calendar.YEAR,1999);
+            calendar.set(Calendar.MONTH,01);
+            author.setDateOfBirth(calendar.getTime());
+            book.setAuthor(author);
+
+            author.getBooks().add(book);
+
+
             bookRepository.save(book);
+
 
 
             Book book1 = bookRepository.findById(1).orElse(null);
@@ -57,6 +77,12 @@ public class PluralsightApplication {
             System.out.println(book1);
             bookRepository.findAll().stream()
                     .forEach(book2 -> System.out.println(book2));
+
+            System.out.println("Books rating");
+            bookRepository.findAll().stream()
+                    .forEach(b->{
+                        System.out.println(b.getId()+" : "+bookRepository.getBookRating(b));
+                    });
 
 
            Course course1 = new Course();
@@ -106,11 +132,19 @@ public class PluralsightApplication {
             course.getSkillsConvered().add(tag1);
             course.getSkillsConvered().add(tag2);
             course.getSkillsConvered().add(tag3);
+            course.getAudiance().add(Audiance.INTERMIDIATE);
 
             student.getPreferenceTopics().add(tag3);
             tag3.setStudentPreference(student);
             tag1.setStudentPreference(student);
             tag2.setStudentPreference(student);
+
+            Path path = new Path();
+            path.setTitle("JEE");
+            path.setDescription("master jee for intermediate");
+            path.getCourses().add(course);
+
+            course.setPath(path);
 
 
             Instructor instructor1 = new Instructor("Ahmed Abderrafie", "prof Youcode Maroc");

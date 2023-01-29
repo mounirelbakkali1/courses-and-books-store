@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/books")
@@ -19,16 +20,7 @@ public class ViewController {
 
     @GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
     public Book showBook(@PathVariable(value = "id") int id){
-       /* Book book = Optional.ofNullable(service.finBook(id)).get().orElse(new Book());
-        System.out.println(book);*/
-        Book book = new Book();
-        book.setIsbn("lklze");
-        Review review1 = new Review(3.1f,book);
-        Review review2 = new Review(3.4f,book);
-        Review review3 = new Review(5f,book);
-        book.getReviews().add(review1);
-        book.getReviews().add(review2);
-        book.getReviews().add(review3);
+        Book book = Optional.ofNullable(service.finBook(id)).get().orElse(new Book());
         return book;
     }
 

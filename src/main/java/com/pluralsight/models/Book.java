@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -24,9 +25,35 @@ public class Book {
     @GeneratedValue(strategy = IDENTITY)
     private int id ;
     private String isbn;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "book",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "book",cascade = ALL)
     @Fetch(FetchMode.SUBSELECT)
     private List<Review> reviews = new ArrayList<>();
+
+    private String description ;
+
+    @Column(columnDefinition = "BLOB")
+    @Lob
+    private byte[] image;
+
+    private float price;
+
+    @ManyToOne(cascade = ALL)
+    @JoinColumn(name = "author_id")
+    private Author author;
+
+
+
+
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", isbn='" + isbn + '\'' +
+                ", reviews=" + reviews +
+                ", author=" + author +
+                '}';
+    }
 
     public void addReview(Review review){
         reviews.add(review);

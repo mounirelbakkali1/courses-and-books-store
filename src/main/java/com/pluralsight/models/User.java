@@ -9,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 import static com.pluralsight.models.Role.USER;
+import static javax.persistence.EnumType.STRING;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -39,6 +40,7 @@ public class User {
     @Lob
     @Column(name = "image",columnDefinition = "BLOB")
     private byte[] images;
+    @Enumerated(STRING)
     private Role role = USER;
 
 }

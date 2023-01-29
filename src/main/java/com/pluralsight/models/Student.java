@@ -1,6 +1,7 @@
 package com.pluralsight.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,7 @@ public class Student extends User{
                     joinColumns = @JoinColumn(name = "student_id"),
                     inverseJoinColumns = @JoinColumn(name = "course_id")
             )
+    @JsonIgnore
     private List<Course> ListOfCoursesEnrolledIn =new ArrayList<Course>();
 
     @OneToMany(cascade = ALL,mappedBy = "studentPreference",fetch = FetchType.LAZY)
