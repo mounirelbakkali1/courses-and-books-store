@@ -27,7 +27,7 @@ public class Student extends User{
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToMany(cascade = {PERSIST,MERGE},fetch = FetchType.LAZY)
+    @ManyToMany(cascade = ALL,fetch = FetchType.LAZY)
             @JoinTable(
                     name = "student_course",
                     joinColumns = @JoinColumn(name = "student_id"),
@@ -36,7 +36,8 @@ public class Student extends User{
     @JsonIgnore
     private List<Course> ListOfCoursesEnrolledIn =new ArrayList<Course>();
 
-    @OneToMany(cascade = ALL,mappedBy = "studentPreference",fetch = FetchType.LAZY)
+    @OneToMany(cascade = ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "student_id",referencedColumnName = "id")
     private List<Tages> preferenceTopics=new ArrayList<>();
 
 

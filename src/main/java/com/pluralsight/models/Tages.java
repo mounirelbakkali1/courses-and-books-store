@@ -2,7 +2,9 @@ package com.pluralsight.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -13,7 +15,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "tages")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Tages {
     @Id
@@ -23,15 +26,7 @@ public class Tages {
     @NotBlank
     @Size(min = 3,max = 20)
     private String name;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "skillsCovered")
-    @JsonIgnore
-    private Course skillsCovered;
-    @ManyToOne(cascade = CascadeType.ALL)
 
-    @JoinColumn(name = "studentPreference")
-    @JsonIgnore
-    private Student studentPreference;
 
     public Tages(String name) {
         this.name = name;

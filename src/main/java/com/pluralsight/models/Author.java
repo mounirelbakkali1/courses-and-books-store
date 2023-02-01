@@ -3,6 +3,7 @@ package com.pluralsight.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,6 +17,7 @@ import static javax.persistence.TemporalType.DATE;
 @Table(name = "authors")
 @Getter
 @Setter
+@ToString
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,9 +32,6 @@ public class Author {
     private Date dateOfBirth;
 
 
-    @OneToMany(mappedBy = "author",fetch = LAZY)
-    @JsonIgnore
-    private Set<Book> books = new HashSet<>();
 
 
 }

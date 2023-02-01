@@ -28,13 +28,9 @@ public class Chapitre {
     private String title;
     private String content;
 
-    @ManyToOne
-    @JoinColumn(name = "course_id")
-    @JsonIgnore
-    private Course course;
 
 
-    @OneToOne
+    @OneToOne(cascade = ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "quiz_id")
     private Quiz quiz;
 

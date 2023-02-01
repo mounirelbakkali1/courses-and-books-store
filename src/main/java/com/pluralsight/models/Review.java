@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-
+@ToString
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,15 +21,12 @@ public class Review {
     private Integer id;
     private float rate;
 
-    @ManyToOne
-    @JoinColumn(name = "book_id")
-    @JsonIgnore
-    private Book book;
 
 
-    public Review(float rate,Book book) {
+
+
+    public Review(float rate) {
         this.rate = rate;
-        this.book= book;
     }
 
 }

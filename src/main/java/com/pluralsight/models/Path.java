@@ -24,6 +24,7 @@ public class Path {
     private String title ;
     private String description ;
 
-    @OneToMany(mappedBy = "path")
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "path_id")
     private Set<Course> courses = new HashSet<>();
 }

@@ -25,8 +25,8 @@ public class Book {
     @GeneratedValue(strategy = IDENTITY)
     private int id ;
     private String isbn;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "book",cascade = ALL)
-    @Fetch(FetchMode.SUBSELECT)
+    @OneToMany(fetch = FetchType.EAGER,cascade = ALL)
+    @JoinColumn(name = "book_id")
     private List<Review> reviews = new ArrayList<>();
 
     private String description ;
@@ -57,6 +57,5 @@ public class Book {
 
     public void addReview(Review review){
         reviews.add(review);
-        review.setBook(this);
     }
 }

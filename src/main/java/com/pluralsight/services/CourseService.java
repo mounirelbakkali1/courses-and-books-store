@@ -1,5 +1,8 @@
 package com.pluralsight.services;
 
+import com.pluralsight.dto.CourseDTO;
+import com.pluralsight.dto.CourseDTOMapper;
+import com.pluralsight.dto.UserDTO;
 import com.pluralsight.models.Course;
 import com.pluralsight.repositories.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CourseService {
@@ -22,6 +26,10 @@ public class CourseService {
 
     @PersistenceContext
     EntityManager em;
+
+
+    @Autowired
+    CourseDTOMapper mapper ;
 
 
     @Transactional
@@ -37,5 +45,13 @@ public class CourseService {
     }
     public List<Course> findAllCourses(){
         return repository.findAll();
+    }
+
+
+    public List<CourseDTO> findAllCoursesDTO(){
+        return repository.findAll()
+                .stream()
+                .map(course -> mapper.apply(course))
+                .collect(Collectors.toList());
     }
 }

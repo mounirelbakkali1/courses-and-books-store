@@ -1,14 +1,13 @@
 package com.pluralsight.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
+import static javax.persistence.CascadeType.ALL;
 
 @Entity
 @Table(name = "quizes")
@@ -19,16 +18,20 @@ public class Quiz {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
-
-    @OneToOne(mappedBy = "quiz")
-    private Chapitre chapitre;
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "quiz")
-    private Set<Question> questions = new HashSet<>();
+    private String description;
+    @Column(name = "success_rate")
+    private float successRate;
 
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "quiz")
-    private List<RAnswer> rightAnswers = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.EAGER,cascade = ALL)
+    @JoinColumn(name = "quiz_id")
+    private List<Question> questions = new ArrayList<>();
+
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = ALL)
+    @JoinColumn(name = "quiz_id")
+    private List<Option> rightAnswers = new ArrayList<>();
 
 
 }

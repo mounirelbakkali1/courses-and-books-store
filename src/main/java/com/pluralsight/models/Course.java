@@ -13,6 +13,7 @@ import java.util.*;
 
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.TemporalType.DATE;
 
 @Entity
@@ -25,7 +26,8 @@ public class Course {
     private int id;
     private String title ;
     private String description;
-    @ManyToMany(mappedBy = "ListOfCoursesEnrolledIn",cascade = ALL,fetch = EAGER)
+    @ManyToMany(mappedBy = "ListOfCoursesEnrolledIn",cascade = ALL,fetch = LAZY)
+    @Fetch(FetchMode.SUBSELECT)
     private List<Student> studentEnrolled= new ArrayList<>();
     @Column(name = "duration")
     private Duration duration;
@@ -36,12 +38,15 @@ public class Course {
     @Lob
     @Column(name = "image",columnDefinition = "BLOB")
     private byte[] image ;
-    @OneToMany(fetch = EAGER,mappedBy = "skillsCovered",cascade = ALL)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @Column(name = "couse")
+
+    @OneToMany(fetch = EAGER,cascade = ALL)
+    @JoinColumn(name = "course_id")
+    @Fetch(FetchMode.SUBSELECT)
     private List<Tages> skillsConvered=new ArrayList<>();
 
-    @OneToMany(mappedBy = "course", cascade = ALL, orphanRemoval = true)
+    @OneToMany(cascade = ALL, orphanRemoval = true,fetch = EAGER)
+    @JoinColumn(name = "course_id")
+    @Fetch(FetchMode.SUBSELECT)
     private List<Chapitre> chapitres = new ArrayList<>();
 
     @ElementCollection(targetClass = Audiance.class)
@@ -49,11 +54,6 @@ public class Course {
     @Enumerated(EnumType.STRING)
     @Column(name = "audiance_id")
     private Set<Audiance> audiance = new HashSet<>();
-
-
-    @ManyToOne(cascade = ALL,fetch = EAGER)
-    @JoinColumn(name = "path_id")
-    private Path path;
 
 
     @Column(name = "release_date")
@@ -65,13 +65,5 @@ public class Course {
 
 
 
-    public void addChapitre(Chapitre chapitre) {
-        chapitres.add(chapitre);
-        chapitre.setCourse(this);
-    }
 
-    public void removeChapitre(Chapitre chapitre) {
-        chapitres.remove(chapitre);
-        chapitre.setCourse(null);
-    }
 }

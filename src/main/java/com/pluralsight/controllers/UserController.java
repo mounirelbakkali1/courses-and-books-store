@@ -2,7 +2,6 @@ package com.pluralsight.controllers;
 
 
 import com.pluralsight.dto.UserDTO;
-import com.pluralsight.models.User;
 import com.pluralsight.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
