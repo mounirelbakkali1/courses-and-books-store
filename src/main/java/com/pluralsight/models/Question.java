@@ -7,12 +7,13 @@ import lombok.Setter;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.*;
+
 import java.util.*;
 
-import static javax.persistence.CascadeType.*;
-import static javax.persistence.FetchType.EAGER;
-import static javax.persistence.FetchType.LAZY;
+import jakarta.persistence.*;
+
+import static jakarta.persistence.CascadeType.ALL;
+import static jakarta.persistence.FetchType.EAGER;
 
 @Entity
 @Table(name = "questions")

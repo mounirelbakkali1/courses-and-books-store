@@ -2,21 +2,17 @@ package com.pluralsight.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.CascadeType.*;
+import static jakarta.persistence.CascadeType.ALL;
 
 @Entity
-@Table(name = "students")
 @Getter
 @Setter
 @NoArgsConstructor

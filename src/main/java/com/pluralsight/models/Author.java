@@ -1,17 +1,13 @@
 package com.pluralsight.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
-import static javax.persistence.FetchType.LAZY;
-import static javax.persistence.TemporalType.DATE;
+import static jakarta.persistence.TemporalType.DATE;
 
 @Entity
 @Table(name = "authors")

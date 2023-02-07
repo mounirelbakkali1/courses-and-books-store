@@ -6,8 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
-
+import jakarta.persistence.*;
 @Entity
 @Table(name = "reviews")
 @Getter

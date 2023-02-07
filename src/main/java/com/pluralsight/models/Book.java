@@ -1,20 +1,15 @@
 package com.pluralsight.models;
 
 
-import lombok.Data;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.*;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.GenerationType.IDENTITY;
+import static jakarta.persistence.CascadeType.ALL;
+import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Getter

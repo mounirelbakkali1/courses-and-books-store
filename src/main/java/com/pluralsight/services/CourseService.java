@@ -2,17 +2,15 @@ package com.pluralsight.services;
 
 import com.pluralsight.dto.CourseDTO;
 import com.pluralsight.dto.CourseDTOMapper;
-import com.pluralsight.dto.UserDTO;
 import com.pluralsight.models.Course;
 import com.pluralsight.repositories.CourseRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 

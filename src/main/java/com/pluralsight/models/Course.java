@@ -1,20 +1,18 @@
 package com.pluralsight.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.*;
 import java.time.Duration;
 import java.util.*;
 
-import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.FetchType.EAGER;
-import static javax.persistence.FetchType.LAZY;
-import static javax.persistence.TemporalType.DATE;
+import static jakarta.persistence.CascadeType.ALL;
+import static jakarta.persistence.FetchType.EAGER;
+import static jakarta.persistence.FetchType.LAZY;
+import static jakarta.persistence.TemporalType.DATE;
 
 @Entity
 @Table(name = "courses")
